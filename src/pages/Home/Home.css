@@ -1,0 +1,27 @@
+.featured-books {
+  padding: 60px 50px;
+  background: #081b33;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.section-heading h2 {
+  color: white;
+  font-size: 32px;
+}
+
+.section-heading a {
+  color: #ffc72c;
+  text-decoration: none;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}

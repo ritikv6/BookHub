@@ -1,4 +1,4 @@
-import ".navbar.css";
+import "./Navbar.css";
 
 function Navbar() {
     return (<header className = "navbar" >
@@ -18,3 +18,5 @@ function Navbar() {
     );
 
 }
+
+export default Navbar;
