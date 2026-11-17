@@ -1,63 +1,98 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import BookCard from "../../Components/BookCard/BookCard";
+import Hero from "../../Components/Hero/Hero";
+import LoadingState from "../../Components/LoadingState/LoadingState";
+import { getBooks } from "../../services/api";
+import { mapBooks } from "../../services/BookMapper";
 import "./Home.css";
 
-const books = [
-  {
-    id: 1,
-    title: "Atomic Habits",
-    author: "James Clear",
-    price: 499,
-    rating: 4.8,
-    image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-  },
-  {
-    id: 2,
-    title: "The Alchemist",
-    author: "Paulo Coelho",
-    price: 299,
-    rating: 4.7,
-    image: "https://images.unsplash.com/photo-1512820790803-83ca734da794",
-  },
-  {
-    id: 3,
-    title: "Rich Dad Poor Dad",
-    author: "Robert Kiyosaki",
-    price: 399,
-    rating: 4.6,
-    image: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e",
-  },
-  {
-    id: 4,
-    title: "Ikigai",
-    author: "Hector Garcia",
-    price: 349,
-    rating: 4.7,
-    image: "https://images.unsplash.com/photo-1519682337058-a94d519337bc",
-  },
+const CATEGORIES = [
+  { label: "Fiction",       subject: "fiction",       emoji: "📖" },
+  { label: "Science",       subject: "science",       emoji: "🔬" },
+  { label: "History",       subject: "history",       emoji: "🏛️" },
+  { label: "Biography",     subject: "biography",     emoji: "👤" },
+  { label: "Business",      subject: "business",      emoji: "💼" },
+  { label: "Programming",   subject: "computers",     emoji: "💻" },
+  { label: "Self-Help",     subject: "self-help",     emoji: "🌱" },
+  { label: "Philosophy",    subject: "philosophy",    emoji: "🤔" },
 ];
 
 function Home() {
+  const [featured, setFeatured] = useState([]);
+  const [featuredLoading, setFeaturedLoading] = useState(true);
+  const [featuredError, setFeaturedError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    getBooks("popular fiction nonfiction", 0, 8)
+      .then(({ items }) => {
+        if (!cancelled) {
+          setFeatured(mapBooks(items).slice(0, 8));
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setFeaturedError(true);
+      })
+      .finally(() => {
+        if (!cancelled) setFeaturedLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <div className="home">
+      {/* Reusable Hero Component */}
+      <Hero />
 
-      <section className="hero">
-        <h1>Welcome to BookHub</h1>
-        <p>Discover your next favourite book.</p>
-      </section>
-
-      <section className="featured-books">
+      {/* Categories */}
+      <section className="home-section" aria-labelledby="categories-heading">
         <div className="section-heading">
-          <h2>Featured Books</h2>
-          <a href="/books">View All</a>
+          <h2 id="categories-heading">Browse by Category</h2>
+          <Link to="/categories">View all</Link>
         </div>
-
-        <div className="book-grid">
-          {books.map((book) => (
-            <BookCard key={book.id} book={book} />
+        <ul className="category-grid" role="list">
+          {CATEGORIES.map((cat) => (
+            <li key={cat.subject}>
+              <Link
+                to={`/categories/${encodeURIComponent(cat.subject)}`}
+                className="category-card"
+              >
+                <span className="category-emoji" aria-hidden="true">{cat.emoji}</span>
+                <span className="category-label">{cat.label}</span>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
+      {/* Featured books */}
+      <section className="home-section" aria-labelledby="featured-heading">
+        <div className="section-heading">
+          <h2 id="featured-heading">Discover Books</h2>
+          <Link to="/books">View all</Link>
+        </div>
+
+        {featuredLoading && <LoadingState message="Loading books…" />}
+
+        {!featuredLoading && featuredError && (
+          <p className="home-section-error">
+            Could not load books right now. <Link to="/books">Browse the full catalogue →</Link>
+          </p>
+        )}
+
+        {!featuredLoading && !featuredError && (
+          <div className="book-grid">
+            {featured.map((book) => (
+              <BookCard key={book.id} book={book} />
+            ))}
+          </div>
+        )}
+      </section>
     </div>
   );
 }

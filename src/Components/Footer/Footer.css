@@ -1,12 +1,115 @@
 .footer {
-  padding: 24px;
+  margin-top: auto;
   background: var(--color-navy-deep);
   color: #d3dce1;
+  border-top: 1px solid rgb(255 255 255 / 8%);
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  width: min(100% - 64px, var(--content-width));
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 64px) 0 36px;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-logo {
+  color: var(--color-gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  text-decoration: none;
+}
+
+.footer-tagline {
+  margin: 0;
+  color: #e0e7ec;
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.footer-disclaimer {
+  margin: 8px 0 0;
+  color: #8c9ea9;
+  font-size: 12px;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.footer-heading {
+  margin: 0 0 4px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: #aebec8;
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 140ms ease;
+}
+
+.footer-links a:hover {
+  color: var(--color-gold);
+}
+
+.footer-bottom {
+  width: min(100% - 64px, var(--content-width));
+  margin: 0 auto;
+  padding: 20px 0;
+  border-top: 1px solid rgb(255 255 255 / 10%);
   text-align: center;
 }
 
-.footer p {
+.footer-bottom p {
   margin: 0;
-  font-size: 13px;
-  line-height: 1.6;
+  color: #8c9ea9;
+  font-size: 12px;
+}
+
+@media (max-width: 860px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-col--brand {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-container {
+    width: calc(100% - 40px);
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-col--brand {
+    grid-column: span 1;
+  }
+
+  .footer-bottom {
+    width: calc(100% - 40px);
+  }
 }

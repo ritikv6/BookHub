@@ -1,0 +1,115 @@
+.wishlist-page {
+  width: min(100% - 64px, var(--content-width));
+  margin: 0 auto;
+  padding: clamp(36px, 5vw, 60px) 0;
+  min-height: 70vh;
+}
+
+.wishlist-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.wishlist-title {
+  margin: 0 0 4px;
+  color: var(--color-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.wishlist-count {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 15px;
+}
+
+.wishlist-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.wishlist-add-all-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-navy);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 160ms;
+}
+
+.wishlist-add-all-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-navy-deep);
+}
+
+.wishlist-clear-btn {
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 13px;
+  font-weight: 600;
+  transition: color 140ms, border-color 140ms;
+}
+
+.wishlist-clear-btn:hover {
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
+  gap: clamp(16px, 2.2vw, 26px);
+}
+
+.wishlist-browse-btn {
+  display: inline-block;
+  padding: 11px 26px;
+  border: 1px solid var(--color-navy);
+  border-radius: 8px;
+  background: var(--color-navy);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 160ms;
+}
+
+.wishlist-browse-btn:hover {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-navy-deep);
+}
+
+@media (max-width: 640px) {
+  .wishlist-page {
+    width: calc(100% - 40px);
+  }
+
+  .book-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 350px) {
+  .wishlist-page {
+    width: calc(100% - 28px);
+  }
+
+  .book-grid {
+    grid-template-columns: 1fr;
+  }
+}
