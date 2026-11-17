@@ -1,30 +1,105 @@
 .navbar {
-  background: #07162c;
-  padding: 20px 50px;
+  position: relative;
+  z-index: 2;
+  background: var(--color-navy-deep);
+  color: #fff;
+  box-shadow: 0 5px 20px rgb(11 32 49 / 12%);
 }
 
 .navbar-container {
   display: flex;
-  justify-content: space-between;
+  width: min(100% - 64px, var(--content-width));
+  min-height: 76px;
+  margin: 0 auto;
   align-items: center;
+  justify-content: space-between;
+  gap: 32px;
 }
 
 .logo {
-  font-size: 28px;
+  flex: 0 0 auto;
+  color: var(--color-gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
   font-weight: 700;
-  color: #ffc72c;
+  letter-spacing: -1px;
 }
 
 .nav-links {
   display: flex;
-  gap: 25px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(16px, 2.5vw, 32px);
 }
 
 .nav-links a {
-  color: white;
-  transition: 0.3s;
+  position: relative;
+  padding: 10px 0;
+  color: #e8edf0;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 160ms ease;
 }
 
-.nav-links a:hover {
-  color: #ffc72c;
+.nav-links a::after {
+  position: absolute;
+  right: 0;
+  bottom: 3px;
+  left: 0;
+  height: 2px;
+  background: var(--color-gold);
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 160ms ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  color: var(--color-gold-light);
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 700px) {
+  .navbar-container {
+    width: min(100% - 40px, var(--content-width));
+    min-height: 0;
+    padding: 16px 0 12px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .logo {
+    font-size: 27px;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: flex-start;
+    gap: clamp(16px, 5vw, 28px);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+  }
+
+  .nav-links a {
+    flex: 0 0 auto;
+    padding: 8px 0;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .navbar-container {
+    width: calc(100% - 28px);
+  }
+
+  .nav-links {
+    gap: 17px;
+  }
 }

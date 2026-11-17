@@ -1,6 +1,12 @@
 .footer {
-  background: #061325;
-  padding: 30px;
+  padding: 24px;
+  background: var(--color-navy-deep);
+  color: #d3dce1;
   text-align: center;
-  color: #cfcfcf;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
 }
