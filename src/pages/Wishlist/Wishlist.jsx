@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useWishlist } from "../../Context/WishlistContext";
-import { useCart } from "../../Context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
+import { useCart } from "../../context/CartContext";
 import BookCard from "../../Components/BookCard/BookCard";
 import EmptyState from "../../Components/EmptyState/EmptyState";
 import "./Wishlist.css";

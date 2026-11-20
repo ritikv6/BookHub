@@ -2,6 +2,10 @@ import axios from "axios";
 
 const API = axios.create({
   baseURL: "https://www.googleapis.com/books/v1",
+  params: {
+    key: import.meta.env.VITE_GOOGLE_BOOKS_API_KEY,
+    country: "IN",
+  },
 });
 
 /**
@@ -9,7 +13,7 @@ const API = axios.create({
  *
  * @param {string} query        - search terms (title, author, subject, etc.)
  * @param {number} startIndex   - 0-based result offset for pagination
- * @param {number} maxResults   - number of results per page (max 40)
+ * @param {number} maxResults   - number of results per page (default 20, max 40)
  * @param {object} [options]    - optional filters: { orderBy, langRestrict }
  * @returns {Promise<{ items: object[], totalItems: number }>}
  */
@@ -51,6 +55,43 @@ export const getBooks = async (
 export const getBookById = async (id) => {
   const response = await API.get(`/volumes/${id}`);
   return response.data;
+};
+
+/**
+ * Search books by specific title.
+ */
+export const searchByTitle = async (
+  title,
+  startIndex = 0,
+  maxResults = 20,
+  options = {}
+) => {
+  return getBooks(`intitle:${title}`, startIndex, maxResults, options);
+};
+
+/**
+ * Search books by author name.
+ */
+export const searchByAuthor = async (
+  author,
+  startIndex = 0,
+  maxResults = 20,
+  options = {}
+) => {
+  return getBooks(`inauthor:${author}`, startIndex, maxResults, options);
+};
+
+/**
+ * Search books by ISBN (ISBN-10 or ISBN-13).
+ */
+export const searchByIsbn = async (
+  isbn,
+  startIndex = 0,
+  maxResults = 20,
+  options = {}
+) => {
+  const cleanIsbn = isbn.replace(/[-\s]/g, "");
+  return getBooks(`isbn:${cleanIsbn}`, startIndex, maxResults, options);
 };
 
 /**

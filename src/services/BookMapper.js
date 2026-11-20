@@ -7,6 +7,19 @@
  * in page or component files.
  */
 
+function cleanDescription(rawDesc) {
+  if (!rawDesc) return null;
+  return rawDesc
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 /**
  * @param {object} volume  — a single Google Books API volume object
  * @returns {BookHubBook}
@@ -50,7 +63,7 @@ export function mapBook(volume) {
     authors: Array.isArray(info.authors) && info.authors.length > 0
       ? info.authors
       : ["Unknown Author"],
-    description: info.description ?? null,
+    description: cleanDescription(info.description),
     coverUrl,
     categories: Array.isArray(info.categories) ? info.categories : [],
     rating: typeof info.averageRating === "number" ? info.averageRating : null,

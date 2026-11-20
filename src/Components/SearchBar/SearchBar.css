@@ -13,12 +13,12 @@
 .search-bar {
   display: flex;
   width: 100%;
-  max-width: 640px;
-  overflow: hidden;
+  max-width: 680px;
   border: 1.5px solid var(--color-border);
-  border-radius: 10px;
+  border-radius: 12px;
   background: #fff;
   transition: border-color 160ms ease, box-shadow 160ms ease;
+  overflow: hidden;
 }
 
 .search-bar:focus-within {
@@ -26,10 +26,32 @@
   box-shadow: 0 0 0 3px rgb(215 169 62 / 18%);
 }
 
+.search-type-wrapper {
+  display: flex;
+  align-items: center;
+  background: #faf8f5;
+  border-right: 1.5px solid var(--color-border);
+}
+
+.search-type-select {
+  padding: 11px 12px;
+  border: none;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 13px;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+}
+
+.search-type-select:focus {
+  color: #805d12;
+}
+
 .search-input {
   flex: 1;
   min-width: 0;
-  padding: 11px 14px;
+  padding: 11px 16px;
   border: none;
   background: transparent;
   color: var(--color-ink);
@@ -41,7 +63,6 @@
   color: var(--color-muted);
 }
 
-/* Hide native ✕ from search input type */
 .search-input::-webkit-search-cancel-button {
   display: none;
 }
@@ -54,6 +75,7 @@
   background: transparent;
   color: var(--color-muted);
   font-size: 14px;
+  cursor: pointer;
   transition: color 140ms ease;
 }
 
@@ -62,16 +84,16 @@
 }
 
 .search-submit {
-  padding: 11px 20px;
+  padding: 11px 24px;
   border: none;
   border-left: 1.5px solid var(--color-border);
-  border-radius: 0 9px 9px 0;
   background: var(--color-navy);
   color: #fff;
   font-size: 14px;
   font-weight: 700;
-  transition: background 160ms ease;
+  cursor: pointer;
   white-space: nowrap;
+  transition: background 160ms ease;
 }
 
 .search-submit:hover {
@@ -79,8 +101,23 @@
   color: var(--color-navy-deep);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 540px) {
+  .search-bar {
+    flex-wrap: wrap;
+  }
+
+  .search-type-wrapper {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .search-type-select {
+    width: 100%;
+    padding: 8px 12px;
+  }
+
   .search-submit {
-    padding: 11px 14px;
+    padding: 11px 16px;
   }
 }

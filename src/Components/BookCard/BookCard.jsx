@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useCart } from "../../Context/CartContext";
-import { useWishlist } from "../../Context/WishlistContext";
+import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 import "./BookCard.css";
 
 const FALLBACK_COVER =

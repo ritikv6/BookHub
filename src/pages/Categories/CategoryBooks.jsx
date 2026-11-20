@@ -4,8 +4,8 @@ import BookCard from "../../Components/BookCard/BookCard";
 import LoadingState from "../../Components/LoadingState/LoadingState";
 import ErrorState from "../../Components/ErrorState/ErrorState";
 import EmptyState from "../../Components/EmptyState/EmptyState";
-import { getBooksBySubject } from "../../Services/Api";
-import { mapBooks } from "../../Services/BookMapper";
+import { getBooksBySubject } from "../../services/api";
+import { mapBooks } from "../../services/BookMapper";
 import "./CategoryBooks.css";
 
 // Map URL-safe subject keys to display labels

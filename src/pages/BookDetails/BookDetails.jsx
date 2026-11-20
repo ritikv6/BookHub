@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { getBookById } from "../../Services/Api";
-import { mapBook } from "../../Services/BookMapper";
-import { useCart } from "../../Context/CartContext";
-import { useWishlist } from "../../Context/WishlistContext";
+import { getBookById } from "../../services/api";
+import { mapBook } from "../../services/BookMapper";
+import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 import LoadingState from "../../Components/LoadingState/LoadingState";
 import ErrorState from "../../Components/ErrorState/ErrorState";
 import "./BookDetails.css";
